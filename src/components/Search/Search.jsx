@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getById } from "../../api/controllers";
+import { getById } from "../../../api/controllers";
 import { selectTasks } from "../../redux/selector";
 import { LoadButton, SearchForm, SearchInput } from "./Search.styled";
 
@@ -11,7 +11,8 @@ export const Search = () => {
     const form = event.currentTarget;
     const search = form.elements.text.value;
     console.log(search)
-   
+    const tasks = getById(search)
+    console.log(tasks)
     form.reset();
     
   };
