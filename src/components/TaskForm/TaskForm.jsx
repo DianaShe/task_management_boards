@@ -1,41 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask, updateTask } from "../../redux/actions";
-import { AddFormButton, Form, Input } from "./TaskForm.styled";
+import { Form, FormButton, Input } from "./TaskForm.styled";
 
 const INITIAL_STATE = {
   title: "",
   description: "",
 };
 
-export const TaskForm = (option, id) => {
-  const [state, setState] = useState(INITIAL_STATE);
+export const TaskForm = ({onActive, option, id, task} ) => {
+  const [formValues, setFormValues] = useState(INITIAL_STATE);
     const dispatch = useDispatch();
+
+    useEffect (() => {
+      setFormValues({title: task?.title, description: task?.description})
+    }, [])
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setState({ [name]: value });
+    setFormValues(prevValues => ({
+      ...prevValues,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e) => {
+    console.log (e.target, e.currentTarget)
+    e.stopPropagation();
     e.preventDefault();
-    const form = e.currentTarget;
-    const values = form.elements;
-    console.log(values);
-    if (option === "add") {
+    
+    if (option === "Add") {
       const newTask = {
-        ...values,
-        status: "toDo",
+        ...formValues,
+        state: "toDo",
       };
       dispatch(addTask(newTask));
     }
 
-    if (option === "edit") {
+    if (option === "Edit") {
+      console.log('in edit')
       const updatedTask = {
-        ...values,
-      };
-
-      dispatch(updateTask({ id, updatedTask }));
+        ...formValues,
+        state: task.state,
+        id,
+      }
+      console.log(updatedTask)
+      dispatch(updateTask(updatedTask));
+      
     }
+
+    onActive()
   };
 
   return (
@@ -43,18 +57,20 @@ export const TaskForm = (option, id) => {
       <Input
         type="text"
         name="title"
+        autoFocus
         placeholder="Add title..."
-        value={state.title}
+        value={formValues.title}
         onChange={handleChange}
       ></Input>
       <Input
         type="text"
         name="description"
+        autoFocus
         placeholder="Add description..."
-        value={state.description}
+        value={formValues.description}
         onChange={handleChange}
       ></Input>
-      <AddFormButton type="submit">Add task</AddFormButton>
+      <FormButton type="submit">{option} task</FormButton>
     </Form>
   );
 };

@@ -18,7 +18,7 @@ flex-grow: 1;
 outline-color: #1976d2
 }`
 
-export const AddFormButton = styled.button`
+export const FormButton = styled.button`
  display: block;
   padding: 8px 12px;
   margin: auto;

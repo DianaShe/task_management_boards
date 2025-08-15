@@ -3,11 +3,15 @@ import { TaskCard } from "../../TaskCard/TaskCard";
 import { ColumnHeadBar } from "../ColumnHeadBar/ColumnHeadBar";
 import { AddTaskButton, Column, TasksList } from "./TasksColumnStyled";
 import { AddTaskModal } from "../../Modal/AddTaskModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const TasksColumn = ({ status }) => {
   const tasks = useSelector((state) => state.tasks);
   const [isShow, setIsShow] = useState(false);
+  useEffect(()=> {
+    console.log("hello")
+    console.log(tasks)
+  },[tasks])
   
       const onShowModal = () => {
           setIsShow(!isShow);
@@ -26,10 +30,11 @@ export const TasksColumn = ({ status }) => {
         return "Done";
     }
   };
+  console.log(tasks)
 
-  const filteredTasks = tasks.filter(
+  const filteredTasks = tasks?.filter(
     (task) => 
-        task.status === getStageByStatus(status)
+        task.state === getStageByStatus(status)
     
   );
    const noTasks = !filteredTasks || !filteredTasks.length;
@@ -40,14 +45,14 @@ export const TasksColumn = ({ status }) => {
       <TasksList>
         
          {filteredTasks?.map((task) => (
-          <TaskCard key={task.id} task={task} ></TaskCard>
+          <TaskCard key={task.id} task={task}></TaskCard>
         ))}
         {status === "To do" &&
             <AddTaskButton type="button" onClick={onShowModal}>Add task +</AddTaskButton>
         }
         {isShow && (
           <AddTaskModal onActive={onShowModal} 
-              option="add"
+              option="Add"
               status={status}
             />
         )}
