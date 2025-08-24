@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask, updateTask } from "../../redux/actions";
-import { Form, FormButton, Input } from "./TaskForm.styled";
+import { Form, FormButton, Input, Label } from "./TaskForm.styled";
 
 const INITIAL_STATE = {
   title: "",
@@ -25,8 +25,6 @@ export const TaskForm = ({onActive, option, id, task} ) => {
   };
 
   const handleSubmit = (e) => {
-    console.log (e.target, e.currentTarget)
-    e.stopPropagation();
     e.preventDefault();
     
     if (option === "Add") {
@@ -54,18 +52,21 @@ export const TaskForm = ({onActive, option, id, task} ) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <Label>Title</Label>
       <Input
         type="text"
         name="title"
+        id="title"
         autoFocus
         placeholder="Add title..."
         value={formValues.title}
         onChange={handleChange}
       ></Input>
+      <Label>Details</Label>
       <Input
         type="text"
         name="description"
-        autoFocus
+        id="description"
         placeholder="Add description..."
         value={formValues.description}
         onChange={handleChange}
