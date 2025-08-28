@@ -49,7 +49,7 @@ export const CloseButton = styled(CloseIcon)`
 //     right: 18px;
 //   }
 
-//   &:hover {
-//     stroke: ${({ theme }) => theme?.colors?.primary || 'red'};
-//   }
-// `;
+  &:hover {
+    stroke: #0e457dff;
+  }
+`;

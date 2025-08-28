@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTask, updateTask } from "../../redux/actions";
-import { Form, FormButton, Input, Label } from "./TaskForm.styled";
+import { Form, Input, Label } from "./TaskForm.styled";
+import { FilledButton } from "../Button/Button.styled";
 
 const INITIAL_STATE = {
   title: "",
@@ -71,7 +72,7 @@ export const TaskForm = ({onActive, option, id, task} ) => {
         value={formValues.description}
         onChange={handleChange}
       ></Input>
-      <FormButton type="submit">{option} task</FormButton>
+      <FilledButton type="submit">{option} task</FilledButton>
     </Form>
   );
 };

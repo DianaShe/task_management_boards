@@ -1,7 +1,7 @@
 import { TaskForm } from "../TaskForm/TaskForm"
 import { Modal } from "./Modal"
 
-export const AddTaskModal = ({ onActive, ...props}) => {
+export const TaskModal = ({ onActive, ...props}) => {
     return (
         <Modal onEsc={true} onActive={onActive} >
           <TaskForm onActive={onActive} {...props} />

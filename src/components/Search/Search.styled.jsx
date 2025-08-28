@@ -7,24 +7,13 @@ display: flex;
 export const SearchInput = styled.input`
 flex-grow: 1;
   padding: 8px;
+  border-radius:4px;
   font: inherit;
+  outline: none;
+  border: 1px solid #e2e5e8;
 
 &:focus {
-outline-color: #1976d2
+border-color: #1976d2
 }
   `
 
-export const LoadButton = styled.button`
- display: inline-flex;
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: none;
-  font: inherit;
-  cursor: pointer;
-  background-color: #e2e5e8;
-  color: inherit;
-  
-  &:hover {
-  background-color: #1976d2;
-  color: #fff;}
-  `

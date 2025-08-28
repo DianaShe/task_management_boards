@@ -1,11 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { selectTasks } from "../../redux/selector";
-import { LoadButton, SearchForm, SearchInput } from "./Search.styled";
+import { useDispatch } from "react-redux";
+import { SearchForm, SearchInput } from "./Search.styled";
 import { fetchBoard } from "../../redux/operations";
+import { EmptyButton } from "../Button/Button.styled";
 
 export const Search = () => {
-  const tasks = useSelector(state => state.tasks)
-  // const [items, setItems] = useState([])
   const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
@@ -25,7 +23,7 @@ export const Search = () => {
         name="text"
         placeholder="Enter ID..."
       />
-      <LoadButton type="submit">Load</LoadButton>
+      <EmptyButton type="submit">Load</EmptyButton>
     </SearchForm>
   );
 }

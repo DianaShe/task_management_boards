@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import { TaskCard } from "../../TaskCard/TaskCard";
 import { ColumnHeadBar } from "../ColumnHeadBar/ColumnHeadBar";
-import { AddTaskButton, Column, TasksList } from "./TasksColumnStyled";
-import { AddTaskModal } from "../../Modal/AddTaskModal";
+import { Column, TasksList } from "./TasksColumnStyled";
+import { TaskModal } from "../../Modal/TaskModal";
 import { useEffect, useState } from "react";
+import { EmptyButton, FilledButton } from "../../Button/Button.styled";
 
 export const TasksColumn = ({ status }) => {
   const tasks = useSelector((state) => state.tasks);
@@ -48,10 +49,10 @@ export const TasksColumn = ({ status }) => {
           <TaskCard key={task.id} task={task}></TaskCard>
         ))}
         {status === "To do" &&
-            <AddTaskButton type="button" onClick={onShowModal}>Add task +</AddTaskButton>
+            <EmptyButton type="button" onClick={onShowModal}>Add task +</EmptyButton>
         }
         {isShow && (
-          <AddTaskModal onActive={onShowModal} 
+          <TaskModal onActive={onShowModal} 
               option="Add"
               status={status}
             />

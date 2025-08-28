@@ -4,7 +4,7 @@ import {
   TaskCardText,
   TaskCardTitle,
 } from "./TaskCard.styled";
-import { AddTaskModal } from "../Modal/AddTaskModal";
+import { TaskModal } from "../Modal/TaskModal";
 
 export const TaskCard = ({ task }) => {
   const { title, description, id, status } = task;
@@ -21,7 +21,7 @@ export const TaskCard = ({ task }) => {
         <TaskCardText>{description}</TaskCardText>
       </TaskCardContainer>
       {showModal && (
-        <AddTaskModal
+        <TaskModal
           onActive={toggleModal}
           option="Edit"
           status={status}

@@ -1,23 +1,20 @@
-import { ColumnHeadBar } from "../ColumnHeadBar/ColumnHeadBar";
-import { TaskCard } from "../../TaskCard/TaskCard";
 import { TasksColumn } from "../TasksColumn/TasksColumn";
 import { ColumnLayout } from "./ColumnContainer.styled";
+import { EmptyButton } from "../../Button/Button.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBoard } from "../../../redux/operations";
 
 export const ColumnContainer = () => {
-  // const status = ["To do", "In progress", "Done"];
-
-  // const getStageByStatus = (status) => {
-  //   switch (status) {
-  //     case "toDo":
-  //       return "To do";
-  //     case "inProgress":
-  //       return "In progress";
-  //     default:
-  //       return "Done";
-  //   }
-  // };
-
+  const dispatch = useDispatch()
+  const tasks = useSelector((state) => state.tasks)
+  const name = useSelector((state) => state.name)
+  const handleClick = () => {
+    console.log ({tasks, name})
+    dispatch(updateBoard({name, tasks}))
+  }
+  
   return (
+    <>
     <ColumnLayout>
       <TasksColumn status="To do">
       </TasksColumn>
@@ -26,5 +23,7 @@ export const ColumnContainer = () => {
       <TasksColumn status="Done">
       </TasksColumn>
     </ColumnLayout>
+    <EmptyButton onClick={handleClick} type='button'>Save changes</EmptyButton>
+    </>
   );
 };
